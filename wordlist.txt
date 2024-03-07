@@ -3,6 +3,7 @@ best version of Unity
 Capgemini
 CEO is leaving
 execute
+executives promoted
 financial comparison to arbitrary list of *similar* tech companies
 no promises of no more RIFs
 non-gaap
@@ -10,9 +11,10 @@ middle of the pack
 real time fee (RTF)
 Red Hat
 re-focus
-reference other companies doing riffs
+reference other companies doing rifs
 return to office (RTO)
 reorg
+reduction in force (RIF)
 right-sizing
 RT3D
 rule of 40
