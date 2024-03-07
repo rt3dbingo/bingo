@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <title>Bingo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td id="0"></td>
+                <td id="1"></td>
+                <td id="2"></td>
+                <td id="3"></td>
+                <td id="4"></td>
+            </tr>
+            <tr>
+                <td id="5"></td>
+                <td id="6"></td>
+                <td id="7"></td>
+                <td id="8"></td>
+                <td id="9"></td>
+            </tr>
+            <tr>
+                <td id="10"></td>
+                <td id="11"></td>
+                <td class="free">Free Space</td>
+                <td id="12"></td>
+                <td id="13"></td>
+            </tr>
+            <tr>
+                <td id="14"></td>
+                <td id="15"></td>
+                <td id="16"></td>
+                <td id="17"></td>
+                <td id="18"></td>
+            </tr>
+            <tr>
+                <td id="19"></td>
+                <td id="20"></td>
+                <td id="21"></td>
+                <td id="22"></td>
+                <td id="23"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(function () {
+            $('td').click(function () {
+                $(this).toggleClass('highlight');
+            });
+        });
+
+        $.get("https://rt3dbingo.github.io/bingo/wordlist.txt", function (result) {
+            let buzzWords = result.split('\n');
+            getRandomBingoWords(buzzWords);
+        });
+        
+
+        function getRandomBingoWords(buzzWords){
+            let arrayLength = buzzWords.length - 1; // -1 removes last blank line.
+            let bingoWords = [];
+
+            while(bingoWords.length < 24){
+                let index = Math.floor(Math.random() * arrayLength);
+                bingoWords.push(buzzWords[index]);
+                buzzWords.splice(index, 1);
+                arrayLength--;
+            }
+
+            fillTable(bingoWords);
+        }
+
+        function fillTable(bingoWords){
+            for (let i = 0; i < bingoWords.length; i++) {
+                $("#"+ i).html(bingoWords[i]);
+            }
+        }
+    </script>
+</body>
+
+  <style>
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: #27292a;
+        text-transform: uppercase;
+    }
+
+    table {
+        width: 100%;
+        height: 100%;
+    }
+
+    td {
+        vertical-align: middle !important;
+        overflow: hidden;
+        text-align: center;
+        font-size: 1.2rem !important;
+        width: 20%;
+        min-width: 20%;
+        max-width: 20%;
+        height: 20%;
+        min-height: 20%;
+        max-height: 20%;
+    }
+
+    .table-bordered td, .table-bordered th {
+        border: 5px solid #d2d4d6;
+    }
+
+    .highlight {
+        color: #d2d4d6;
+        background: #27292a;
+    }
+
+    .free {
+        color: #d2d4d6;
+        background: #27292a;
+    }
+
+</style>
+
+</html>
